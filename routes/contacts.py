@@ -10,20 +10,20 @@ def index():
     contacts = Contact.query.all()
     return render_template('index.html', contacts=contacts)
 
-
+#Realiza una inserción en la base de datos
 @contacts.route('/new', methods=['POST'])
 def add_contact():
     if request.method == 'POST':
 
-        # receive data from the form
+        # Recibe la información del formulario
         fullname = request.form['fullname']
         email = request.form['email']
         phone = request.form['phone']
 
-        # create a new Contact object
+        # Crea un nuevo objeto de tipo Contacto
         new_contact = Contact(fullname, email, phone)
 
-        # save the object into the database
+        # Guarda la información en la base de datos
         db.session.add(new_contact)
         db.session.commit()
 
@@ -31,13 +31,14 @@ def add_contact():
 
         return redirect(url_for('contacts.index'))
 
-
+#Acualiza la información de un contacto registrado en la base de datos
 @contacts.route("/update/<string:id>", methods=["GET", "POST"])
 def update(id):
-    # get contact by Id
+    # Obtiene un contacto mediante un id
     print(id)
     contact = Contact.query.get(id)
 
+    #Realiza la actualización de los datos con los datos del formulario
     if request.method == "POST":
         contact.fullname = request.form['fullname']
         contact.email = request.form['email']
@@ -51,9 +52,10 @@ def update(id):
 
     return render_template("update.html", contact=contact)
 
-
+#Elimina la información de un contacto registrado en la base de datos
 @contacts.route("/delete/<id>", methods=["GET"])
 def delete(id):
+    #Elimina el registro de un contacto mediante su id
     contact = Contact.query.get(id)
     db.session.delete(contact)
     db.session.commit()

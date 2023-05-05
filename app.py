@@ -5,7 +5,7 @@ from config import DATABASE_CONNECTION_URI
 
 app = Flask(__name__)
 
-# settings
+# Configuraciones de la aplicación Flask
 app.secret_key = 'mysecret'
 print(DATABASE_CONNECTION_URI)
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_CONNECTION_URI

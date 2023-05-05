@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 
+#Carga de datos para realizar la concección a la base de datos
 load_dotenv()
 
 user = os.environ["USER"]
